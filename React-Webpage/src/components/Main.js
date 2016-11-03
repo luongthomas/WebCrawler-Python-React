@@ -1,20 +1,25 @@
 import React from 'react'
 import MainContainer from './MainContainer'
 import Navbar  from './Navbar/Navbar'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 
 const Main = React.createClass({
   render () {
     return (
-      <MainContainer>
-        <Navbar />
+      <MuiThemeProvider>
+        <MainContainer>
+          <Navbar />
 
-        <div>
-          <span><h1>{`Web Crawler`}</h1></span>
-        </div>
+          <div>
+            <span><h1>{`Web Crawler`}</h1></span>
+          </div>
 
-        {this.props.children}
+          {this.props.children}
 
-      </MainContainer>
+        </MainContainer>
+      </MuiThemeProvider>
     );
   },
 });

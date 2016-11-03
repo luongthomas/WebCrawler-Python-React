@@ -1,9 +1,13 @@
 import React from 'react'
+import { Link } from 'react-router'
 import {
-  Button, ButtonGroup, DropdownButton, MenuItem,
+  Button, ButtonGroup, Tooltip, OverlayTrigger,
   FormGroup, ControlLabel, HelpBlock, FormControl,
-  Tooltip, OverlayTrigger,
 } from 'react-bootstrap'
+
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
+
 
 // import LoadingButton from '../LoadingButton/LoadingButton'
 import SearchInfoModal from '../SearchInfoModal/SearchInfoModal'
@@ -79,13 +83,14 @@ export default function Form (props) {
         </FormGroup>
         <br />
         <br />
-        <ButtonGroup bsSize='large'>
-          <DropdownButton title="Type of Search" bsSize="large" bsStyle="info" id="dropdown-size-large">
-            <MenuItem eventKey="1">{`Depth-First Search`}</MenuItem>
-            <MenuItem divider />
-            <MenuItem eventKey="2">{`Breadth-First Search`}</MenuItem>
-          </DropdownButton>
-          <Button type='button' bsStyle="success">{`GO`}</Button>
+          <DropDownMenu searchType={props.searchType} onChange={props.onSearchChange}>
+            <MenuItem searchType={1} label="BFS" primaryText="Breadth-First Search" />
+            <MenuItem searchType={2} label="DFS" primaryText="Depth-First Search" />
+          </DropDownMenu>
+        <ButtonGroup bsSize='small'>
+          <Link to='/results'>
+            <Button type='button' bsStyle="success">{`GO`}</Button>
+          </Link>
         </ButtonGroup>
       </form>
 

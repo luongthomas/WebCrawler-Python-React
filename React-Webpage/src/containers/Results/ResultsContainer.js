@@ -1,5 +1,5 @@
 import React from 'react'
-import Results from '../../conponents/Results/Results'
+import Results from '../../components/Results/Results'
 
 const ResultsContainer = React.createClass({
   render () {
