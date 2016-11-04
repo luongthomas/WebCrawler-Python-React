@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 import {
   Button, ButtonGroup, Tooltip, OverlayTrigger,
-  FormGroup, ControlLabel, HelpBlock, FormControl,
+  FormGroup, HelpBlock, FormControl,
 } from 'react-bootstrap'
 
 import DropDownMenu from 'material-ui/DropDownMenu';
@@ -58,7 +58,6 @@ export default function Form (props) {
           controlId="formBasicText"
           validationState={props.getValidationState()}
         >
-          <ControlLabel>Web Crawler Information Input</ControlLabel>
           <OverlayTrigger placement="left" overlay={startSiteTooltip}>
             <FormControl
               type="text"
@@ -88,9 +87,9 @@ export default function Form (props) {
             <MenuItem searchType={2} label="DFS" primaryText="Depth-First Search" />
           </DropDownMenu>
         <ButtonGroup bsSize='small'>
-          <Link to='/results'>
-            <Button type='button' bsStyle="success">{`GO`}</Button>
-          </Link>
+
+          <a href="/resultsPage"><Button type='button' bsStyle="success">{`GO`}</Button></a>
+
         </ButtonGroup>
       </form>
 

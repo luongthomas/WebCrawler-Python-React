@@ -102,7 +102,7 @@ def breadthSpider(url, word, maxPages):
 				print(" **Success!**")
 			except:
 				print(" **Failed!**")
-			traversalDict.update({url: {"children": links, "kw": foundWord}})
+			traversalDict.update({url: {"children": links, "keyword": foundWord}})
 	if foundWord:
 		print("The word", word, "was found at", url)
 	else:
