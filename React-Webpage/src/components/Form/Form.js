@@ -88,7 +88,7 @@ export default function Form (props) {
           </DropDownMenu>
         <ButtonGroup bsSize='small'>
 
-          <a href="/resultsPage"><Button type='button' bsStyle="success">{`GO`}</Button></a>
+          <a href="https://tangographicalcrawler.herokuapp.com/tangoGraphicalCrawler.html"><Button type='button' bsStyle="success">{`GO`}</Button></a>
 
         </ButtonGroup>
       </form>
