@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 #
-# Description: Crawls the web from a starting url for a var number of pages or until 
-# a stop word is encountered. Returns a JSON file listing visited pages, their parent-child 
+# Description: Crawls the web from a starting url for a var number of pages or until
+# a stop word is encountered. Returns a JSON file listing visited pages, their parent-child
 # relationships, and whether they contain the stop word.
 #
 # Built to function in Flask with Python 3.x.
 # Import from libraries: flask, html.parser, urllib, json
 #
-# Authorship and dates are provided by version control. 
+# Authorship and dates are provided by version control.
 # Credit for 3rd party code is provided in the body of the code.
 
 from flask import Flask
@@ -21,7 +21,7 @@ from flask import make_response
 # Crawler Dependencies
 from html.parser import HTMLParser # to isolate links in a web page's HTML
 from urllib.request import urlopen # to access a web page
-from urllib import parse 
+from urllib import parse
 import json # to build JSON output
 
 app = Flask(__name__)
@@ -80,7 +80,7 @@ def startSpider():
 	word = "secure"
 	maxPages = 10
 	searchType = "breadth" #vs. "depth"
-	
+
 	# PARSING TOOL
 	# We are going to create a class called LinkParser that inherits some
 	# methods from HTMLParser which is why it is passed into the definition
@@ -138,11 +138,11 @@ def startSpider():
 	# It conducts a "Breadth First" search for the word. It returns a JSON file listing the pages that were
 	# visited, their child-links, and whether or not they contain the target word. Only 1 page may contain the
 	# word since encountering the word ends the search. The crawler does not visit a page twice.
-	## Credit: Minor changes to http://www.netinstructions.com/how-to-make-a-web-crawler-in-under-50-lines-of-python-code/ 
+	## Credit: Minor changes to http://www.netinstructions.com/how-to-make-a-web-crawler-in-under-50-lines-of-python-code/
 	# TO DO: check that a page is only visited once
 
-	def breadthSpider(url, word, maxPages): 
-		traversalDict = {} # Modification --> build a dictionary of pages you've traversed; 
+	def breadthSpider(url, word, maxPages):
+		traversalDict = {} # Modification --> build a dictionary of pages you've traversed;
 		pagesToVisit = [url] # Modification
 		numberVisited = 0
 		foundWord = False
@@ -158,7 +158,7 @@ def startSpider():
 			visited = False
 			for key in traversalDict:
 				if key == url:
-					visited = True				
+					visited = True
 			# Modification --> only visit the page if it is new.
 			if visited == False:
 				numberVisited = numberVisited +1  # Modification --> moved from above
@@ -182,12 +182,12 @@ def startSpider():
 
 	# # DEPTHSPIDER: HELPER
 	# # Here is a helper function for a spider that completes Depth first search
-	# def goDeep(url, word, maxPages, numberVisited, traversalList):  
+	# def goDeep(url, word, maxPages, numberVisited, traversalList):
 		# # One goal is to collect the links on this page -- ie to fill this array
 		# links = []
 		# # nj --> Check whether or not the page was previously visited
 		# visited = False
-		# for i in range(0,len(traversalList)): 
+		# for i in range(0,len(traversalList)):
 			# if traversalList[i] == url:
 				# visited = True
 		# # nj --> only visit the page if it is new.
@@ -205,17 +205,17 @@ def startSpider():
 					# pagesToVisit = pagesToVisit + links
 					# print(" **Success!**")
 			# except:
-				# print(" **Failed!**")		
+				# print(" **Failed!**")
 		# while numberVisited < maxPages and links != [] and not foundWord:
 			# url = links[0]
 			# links = links[1:]
 			# numberVisited, foundWord, traversalList = goDeep(url, word, maxPages, numberVisited, traversalList)
 		# #After the branch is explored in full, return traversalList
 		# return numberVisited, foundWord, traversalList
-			
-	# # DEPTHSPIDER			
-	# # Here is a spider that completes a Depth First search. 
-	# def depthSpider(url, word, maxPages):  
+
+	# # DEPTHSPIDER
+	# # Here is a spider that completes a Depth First search.
+	# def depthSpider(url, word, maxPages):
 		# numberVisited = 0
 		# traversalList = []
 		# numberVisited, foundWord, traversalList = goDeep(url, word, maxPages, numberVisited, traversalList)
@@ -223,7 +223,7 @@ def startSpider():
 			# print("The word", word, "was found at", url)
 		# else:
 			# print("Word never found")
-		
+
 	# COMMAND THE CRAWLER TO BEGIN
 	# Crawl the web and build a dictionary of website information. Each line contains the name of about
 	# a site, a list of its child-links, and whether or not the site contains the stop word.
@@ -242,7 +242,7 @@ def startSpider():
 	# Write the results from the crawl, which are saved in traversalDict, in JSON format and into a local file.
 	# TO DO: send file to UI
 	with open('traversed.json', 'w') as fp:
-	json.dump(traversalDict, fp, sort_keys=False, indent=4) #note singular dump
+		json.dump(traversalDict, fp, sort_keys=False, indent=4) #note singular dump
 
 	return "Crawler ran"
 

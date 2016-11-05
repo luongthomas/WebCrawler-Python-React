@@ -53,7 +53,7 @@ export default function Form (props) {
     <div style={styles.formContainer}>
 
       <h4>{`Where would you like to start the crawl?`}</h4>
-      <form>
+      <form onSubmit={props.onSubmit}>
         <FormGroup
           controlId="formBasicText"
           validationState={props.getValidationState()}
@@ -62,19 +62,21 @@ export default function Form (props) {
             <FormControl
               type="text"
               placeholder="Staring Website"
-              onChange={props.onChange}
+              onChange={props.onUrlChange}
             />
           </OverlayTrigger>
           <OverlayTrigger placement="left" overlay={depthTooltip}>
           <FormControl
             type="text"
             placeholder="Depth of Search"
+            onChange={props.onMaxPagesChange}
           />
           </OverlayTrigger>
           <OverlayTrigger placement="left" overlay={keywordTooltip}>
           <FormControl
             type="text"
             placeholder="Optional Keyword"
+            onChange={props.onKeywordChange}
           />
           </OverlayTrigger>
           <FormControl.Feedback />
@@ -82,14 +84,16 @@ export default function Form (props) {
         </FormGroup>
         <br />
         <br />
-          <DropDownMenu searchType={props.searchType} onChange={props.onSearchChange}>
-            <MenuItem searchType={1} label="BFS" primaryText="Breadth-First Search" />
-            <MenuItem searchType={2} label="DFS" primaryText="Depth-First Search" />
+          <DropDownMenu searchType={props.searchType} onChange={props.onSearchTypeChange}>
+            <MenuItem searchType={"BFS"} label="BFS" primaryText="Breadth-First Search" />
+            <MenuItem searchType={"DFS"} label="DFS" primaryText="Depth-First Search" />
           </DropDownMenu>
         <ButtonGroup bsSize='small'>
 
-          <a href="https://tangographicalcrawler.herokuapp.com/tangoGraphicalCrawler.html"><Button type='button' bsStyle="success">{`GO`}</Button></a>
+          <a href="https://tangographicalcrawler.herokuapp.com/tangoGraphicalCrawler.html">
+          {`Go to results`}</a>
 
+        <Button type='submit' bsStyle="success">{`GO`}</Button>
         </ButtonGroup>
       </form>
 

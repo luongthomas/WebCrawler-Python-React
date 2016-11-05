@@ -13,13 +13,6 @@ const Navbar = React.createClass({
         <NavItem eventKey="1" href="/home">Home</NavItem>
         <NavItem eventKey="2">Crawler Form</NavItem>
         <NavItem eventKey="3">Crawler Results</NavItem>
-        <NavDropdown eventKey="4" title="Account" id="nav-dropdown">
-          <MenuItem eventKey="4.1">Login</MenuItem>
-          <MenuItem eventKey="4.2">Register</MenuItem>
-          <MenuItem eventKey="4.3">Account Preferences</MenuItem>
-          <MenuItem divider />
-          <MenuItem eventKey="4.4">Log Out</MenuItem>
-        </NavDropdown>
       </Nav>
     );
   }
