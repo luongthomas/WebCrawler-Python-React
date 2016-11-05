@@ -5,7 +5,7 @@ var labelType, useGradients, nativeTextSupport, animate;
       iStuff = ua.match(/iPhone/i) || ua.match(/iPad/i),
       typeOfCanvas = typeof HTMLCanvasElement,
       nativeCanvasSupport = (typeOfCanvas == 'object' || typeOfCanvas == 'function'),
-      textSupport = nativeCanvasSupport 
+      textSupport = nativeCanvasSupport
         && (typeof document.createElement('canvas').getContext('2d').fillText == 'function');
   //I'm setting this based on the fact that ExCanvas provides text support for IE
   //and that as of today iPhone/iPad current text support is lame
@@ -18,7 +18,7 @@ var labelType, useGradients, nativeTextSupport, animate;
 var Log = {
   elem: false,
   write: function(text){
-    if (!this.elem) 
+    if (!this.elem)
       this.elem = document.getElementById('log');
     this.elem.innerHTML = text;
     this.elem.style.left = (500 - this.elem.offsetWidth / 2) + 'px';
@@ -35,8 +35,15 @@ function init(){
         "name": "<a target='_blank' href='http://www.nytimes.com/'><span title='http://www.nytimes.com/'><img src='/images/jack.png'></span></a> Parent",
         "children": [{
             "id": "126510_1",
+<<<<<<< HEAD
             "name": "<a target='_blank' href='http://www.nytimes.com/content/help/site/ie9-support.html'><span title='http://www.nytimes.com/content/help/site/ie9-support.html'><img src='/images/jack.png'></span></a> Child",
             "data": { 
+=======
+            "name": "<a href='http://www.google.com'><img src = './jack.png'/></a>",
+            "data": {
+                "family member": "Darby",
+                "relation": "Spouse",
+>>>>>>> origin/master
                 "$type":"custom"
             },
             "children": []
@@ -74,8 +81,13 @@ function init(){
     };
     //end
     var infovis = document.getElementById('infovis');
+<<<<<<< HEAD
     var w = infovis.offsetWidth - 50, h = infovis.offsetHeight - 100;
     
+=======
+    var w = infovis.offsetWidth - 50, h = infovis.offsetHeight - 50;
+
+>>>>>>> origin/master
     //init Hypertree
     var ht = new $jit.Hypertree({
       //id of the visualization container
@@ -134,12 +146,12 @@ function init(){
           var w = domElement.offsetWidth;
           style.left = (left - w / 2) + 'px';
       },
-      
+
       onComplete: function(){
           Log.write("done");
-          
+
           //Build the right column relations list.
-          //This is done by collecting the information (stored in the data property) 
+          //This is done by collecting the information (stored in the data property)
           //for all the nodes adjacent to the centered node.
           var node = ht.graph.getClosestNodeToOrigin("current");
           var html = "<h4>" + node.name + "</h4><b>Connections:</b>";
@@ -168,8 +180,9 @@ function init(){
 }
 
 //Custom node
-$jit.Hypertree.Plot.NodeTypes.implement({ 
+$jit.Hypertree.Plot.NodeTypes.implement({
   //// this node type is used for plotting resource types (web)
+<<<<<<< HEAD
    'custom': 
        { 'render': function(node, canvas) { 
            var ctx = canvas.getCtx(); 
@@ -182,3 +195,17 @@ $jit.Hypertree.Plot.NodeTypes.implement({
           } 
       } 
 });
+=======
+   'custom':
+       { 'render': function(node, canvas) {
+           var ctx = canvas.getCtx();
+           var img = new Image();
+           var pos = node.pos.getc(true);
+           img.onload = function(){
+               ctx.drawImage(img,pos.x-15, pos.y-15);
+           };
+           img.src = './jack.png';
+          }
+      }
+});
+>>>>>>> origin/master

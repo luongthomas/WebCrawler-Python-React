@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Popover, Tooltip, Modal, OverlayTrigger, Tab, Tabs } from 'react-bootstrap'
+import { Button, Modal, Tab, Tabs } from 'react-bootstrap'
 import BFS from './BFS.png'
 import DFS from './DFS.png'
 
@@ -27,16 +27,6 @@ const SearchInfoModal = React.createClass({
   },
 
   render() {
-    const popover = (
-      <Popover id="modal-popover" title="popover">
-        very popover. such engagement
-      </Popover>
-    );
-    const tooltip = (
-      <Tooltip id="modal-tooltip">
-        wow.
-      </Tooltip>
-    )
 
     return (
       <div>

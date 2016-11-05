@@ -1,9 +1,13 @@
 import React from 'react'
+import { Link } from 'react-router'
 import {
-  Button, ButtonGroup, DropdownButton, MenuItem,
-  FormGroup, ControlLabel, HelpBlock, FormControl,
-  Tooltip, OverlayTrigger,
+  Button, ButtonGroup, Tooltip, OverlayTrigger,
+  FormGroup, HelpBlock, FormControl,
 } from 'react-bootstrap'
+
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
+
 
 // import LoadingButton from '../LoadingButton/LoadingButton'
 import SearchInfoModal from '../SearchInfoModal/SearchInfoModal'
@@ -54,7 +58,6 @@ export default function Form (props) {
           controlId="formBasicText"
           validationState={props.getValidationState()}
         >
-          <ControlLabel>Web Crawler Information Input</ControlLabel>
           <OverlayTrigger placement="left" overlay={startSiteTooltip}>
             <FormControl
               type="text"
@@ -79,13 +82,14 @@ export default function Form (props) {
         </FormGroup>
         <br />
         <br />
-        <ButtonGroup bsSize='large'>
-          <DropdownButton title="Type of Search" bsSize="large" bsStyle="info" id="dropdown-size-large">
-            <MenuItem eventKey="1">{`Depth-First Search`}</MenuItem>
-            <MenuItem divider />
-            <MenuItem eventKey="2">{`Breadth-First Search`}</MenuItem>
-          </DropdownButton>
-          <Button type='button' bsStyle="success">{`GO`}</Button>
+          <DropDownMenu searchType={props.searchType} onChange={props.onSearchChange}>
+            <MenuItem searchType={1} label="BFS" primaryText="Breadth-First Search" />
+            <MenuItem searchType={2} label="DFS" primaryText="Depth-First Search" />
+          </DropDownMenu>
+        <ButtonGroup bsSize='small'>
+
+          <a href="https://tangographicalcrawler.herokuapp.com/tangoGraphicalCrawler.html"><Button type='button' bsStyle="success">{`GO`}</Button></a>
+
         </ButtonGroup>
       </form>
 

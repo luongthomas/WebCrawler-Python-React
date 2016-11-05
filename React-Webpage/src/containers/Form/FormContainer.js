@@ -4,26 +4,32 @@ import Form from '../../components/Form/Form'
 const FormContainer = React.createClass({
   getInitialState() {
     return {
-      value: ''
+      link: '',
+      searchType: 1,
     };
   },
 
   getValidationState() {
-    const length = this.state.value.length;
+    const length = this.state.link.length;
     if (length > 10) return 'success';
     else if (length > 5) return 'warning';
     else if (length > 0) return 'error';
   },
 
   handleChange(e) {
-    this.setState({ value: e.target.value });
+    this.setState({ value: e.target.link });
+  },
+
+  handleSearchChange(event, index, searchType) {
+    this.setState({searchType});
   },
 
   render () {
     return (
       <Form
         getValidationState={this.getValidationState}
-        onChange={this.handleChange}/>
+        onChange={this.handleChange}
+        onSearchChange={this.handleSearchChange} />
     )
   },
 })
