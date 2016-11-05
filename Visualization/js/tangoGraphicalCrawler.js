@@ -32,38 +32,38 @@ function init(){
 
     var json = {
         "id": "347_0",
-        "name": "<a target='_blank' href='http://www.nytimes.com/'><span title='http://www.nytimes.com/'><img src='/images/jack.png'></span></a> Parent",
+        "name": "<a target='_blank' href='http://www.nytimes.com/'><span title='http://www.nytimes.com/'><img src='/CS419/images/jack.png'></span></a> Parent",
         "children": [{
             "id": "126510_1",
-            "name": "<a target='_blank' href='http://www.nytimes.com/content/help/site/ie9-support.html'><span title='http://www.nytimes.com/content/help/site/ie9-support.html'><img src='/images/jack.png'></span></a> Child",
+            "name": "<a target='_blank' href='http://www.nytimes.com/content/help/site/ie9-support.html'><span title='http://www.nytimes.com/content/help/site/ie9-support.html'><img src='/CS419/images/jack.png'></span></a> Child",
             "data": { 
                 "$type":"custom"
             },
             "children": []
         }, {
             "id": "126510_2",
-            "name": "<a target='_blank' href='http://www.nytimes.com/#top-news'><span title='http://www.nytimes.com/#top-news'><img src='/images/jack.png'></span></a> Child",
+            "name": "<a target='_blank' href='http://www.nytimes.com/#top-news'><span title='http://www.nytimes.com/#top-news'><img src='/CS419/images/jack.png'></span></a> Child",
             "data": { 
                 "$type":"custom"
               },
             "children": []
         }, {
             "id": "126510_3",
-            "name": "<a target='_blank' href='http://www.nytimes.com/#site-index-navigation'><span title='http://www.nytimes.com/#site-index-navigation'><img src='/images/jack.png'></span></a> Child",
+            "name": "<a target='_blank' href='http://www.nytimes.com/#site-index-navigation'><span title='http://www.nytimes.com/#site-index-navigation'><img src='/CS419/images/jack.png'></span></a> Child",
             "data": { 
                 "$type":"custom"
             },
             "children": []
         }, {
             "id": "126510_4",
-            "name": "<a target='_blank' href='http://cn.nytimes.com'><span title='http://cn.nytimes.com'><img src='/images/jack.png'></span></a> Child",
+            "name": "<a target='_blank' href='http://cn.nytimes.com'><span title='http://cn.nytimes.com'><img src='/CS419/images/jack.png'></span></a> Child",
             "data": { 
                 "$type":"custom"
             },
             "children": []
         }, {
             "id": "126510_5",
-            "name": "<a target='_blank' href='http://www.nytimes.com/es/'><span title='http://www.nytimes.com/es/'><img src='/images/jack.png'></span></a> Child",
+            "name": "<a target='_blank' href='http://www.nytimes.com/es/'><span title='http://www.nytimes.com/es/'><img src='/CS419/images/jack.png'></span></a> Child",
             "data": { 
                 "$type":"custom"
 
@@ -178,7 +178,7 @@ $jit.Hypertree.Plot.NodeTypes.implement({
            img.onload = function(){ 
                ctx.drawImage(img,pos.x-25, pos.y-25); 
            }; 
-           img.src = 'C:/Users/DarbyBeltran/Desktop/CS419/jack.png'; 
+           img.src = '/CS419/images/jack.png'; 
           } 
       } 
 });
