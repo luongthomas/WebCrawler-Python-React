@@ -95,7 +95,7 @@ export default function Form (props) {
 
         <Button type='submit' bsStyle="success">{`GO`}</Button>
         </ButtonGroup>
-        <Button type='submit' bsStyle="success" onClick={props.sendCookie}>{`Send Cookie`}</Button>
+        <Button type='submit' bsStyle="success" onClick={props.onSubmit}>{`Send Cookie`}</Button>
       </form>
 
       <br />

@@ -1,5 +1,6 @@
 
 const axios = require('axios');
+let querystring = require('querystring');
 
 // const units  = '&units=imperial';
 // const _baseURL = 'https://tangoflask.herokuapp.com/crawler';
@@ -11,23 +12,29 @@ const config = {
     headers: {'X-Requested-With': 'XMLHttpRequest'},
     responseType: 'json',
     withCredentials: false,
+    // headers: {
+    //   'content-type': 'application/json;charset=UTF-8'
+    // },
   }
 
-function startCrawler(url, maxPages, keyword, searchType) {
-  console.log(typeof(url), typeof(maxPages), typeof(keyword), typeof(searchType))
 
-  axios.post('http://127.0.0.1:5000/crawler', {
-    //headers: {'X-Requested-With': 'XMLHttpRequest'},
-    //withCredentials: false,
-    //responseType: 'json',
-    url: url,
-    maxPages: maxPages,
-    keyword: keyword,
-    searchType: searchType
-  })
+function startCrawler(site, pages, word, type) {
+  console.log(typeof(site), typeof(pages), typeof(word), typeof(type))
+
+  axios.post('http://127.0.0.1:5000/crawler',
+    querystring.stringify({
+      startUrl: site,
+      maxPages: pages,
+      keyword: word,
+      searchType: type
+    }),
+    {
+      headers: {'X-Requested-With': 'XMLHttpRequest', 'Content-Type': 'application/x-www-form-urlencoded'},
+      responseType: 'json'
+    })
+
     .then(function(response) {
-      console.log(response)
-      console.log('crawler JSON here')
+      console.log(response.data)
       return 'crawled'
     })
     .catch(function(error) {
