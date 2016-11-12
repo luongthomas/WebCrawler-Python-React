@@ -2,27 +2,47 @@
 const axios = require('axios');
 
 // const units  = '&units=imperial';
-const _baseURL = '127.0.0.1:3000/crawler';
+// const _baseURL = 'https://tangoflask.herokuapp.com/crawler';
+const _baseURL = 'http://127.0.0.1:5000/add';
 
-function getQueryStringData(city) {
-  return {
-    q: city,
-    type: 'accurate',
-    cnt: 5,
-  };
-}
+const config = {
+    //method: 'get',
+    url: _baseURL,
+    headers: {'X-Requested-With': 'XMLHttpRequest'},
+    responseType: 'json',
+    withCredentials: false,
+  }
+
+function startCrawler(url, maxPages, keyword, searchType) {
+  console.log(typeof(url), typeof(maxPages), typeof(keyword), typeof(searchType))
+
+  axios.post('http://127.0.0.1:5000/crawler', {
+    //headers: {'X-Requested-With': 'XMLHttpRequest'},
+    //withCredentials: false,
+    //responseType: 'json',
+    url: url,
+    maxPages: maxPages,
+    keyword: keyword,
+    searchType: searchType
+  })
+    .then(function(response) {
+      console.log(response)
+      console.log('crawler JSON here')
+      return 'crawled'
+    })
+    .catch(function(error) {
+      console.log(error)
+      return 'error'
+    })
 
 
-function getForecast(city) {
-  const queryStringData = getQueryStringData(city);
-  const url = prepUrl('forecast/daily', queryStringData);
-
-  return axios.get(url)
-    .then(function (forecastData) {
-      return forecastData.data;
-    });
+  // return axios.get(config)
+  //   .then(function (response) {
+  //     console.log(response.data)
+  //     return 'startCrawler returned';
+  //   });
 }
 
 module.exports = {
-  getForecast: getForecast,
+  startCrawler
 };

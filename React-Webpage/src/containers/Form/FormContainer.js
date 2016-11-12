@@ -1,11 +1,12 @@
 import React from 'react'
 import Form from '../../components/Form/Form'
+import { startCrawler } from '../../utils/api'
 
 const FormContainer = React.createClass({
   getInitialState() {
     return {
       url: '',
-      searchType: 'DFS',
+      searchType: 'BFS',
       keyword: '',
       maxPages: 1,
     };
@@ -31,18 +32,31 @@ const FormContainer = React.createClass({
   },
 
   handleSearchTypeChange(event, index, searchType) {
-    this.setState({searchType})
+    this.setState({searchType: event.target.value})
+  },
+
+  sendCookie(e) {
+    e.preventDefault()
+    console.log(startCrawler(
+      this.state.url,
+      this.state.maxPages,
+      this.state.keyword,
+      this.state.searchType)
+    )
+    console.log('sending cookie..?')
   },
 
   handleSubmit(e) {
     e.preventDefault()
-    console.log(this.state)
+    //console.log(this.state)
     document.cookie = `${'url=' + this.state.url}`
     document.cookie = `${'keyword=' + this.state.keyword}`
     document.cookie = `${'maxPages=' + this.state.maxPages}`
     document.cookie = `${'searchType=' + this.state.searchType}`
 
-    console.log('The cookie is: ' + document.cookie)
+    console.log(typeof(this.state.maxPages))
+    console.log(document.cookie)
+    // console.log('The cookie is: ' + document.cookie)
 
     // let cookieStr = `${'url=' + this.state.url + ';'}`
     // cookieStr += `${'keyword=' + this.state.keyword + ';'}`
@@ -64,7 +78,8 @@ const FormContainer = React.createClass({
         onKeywordChange={this.handleKeywordChange}
         onMaxPagesChange={this.handleMaxPagesChange}
         onSearchTypeChange={this.handleSearchTypeChange}
-        onSubmit={this.handleSubmit} />
+        onSubmit={this.handleSubmit}
+        sendCookie={this.sendCookie}/>
     )
   },
 })

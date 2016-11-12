@@ -53,7 +53,7 @@ export default function Form (props) {
     <div style={styles.formContainer}>
 
       <h4>{`Where would you like to start the crawl?`}</h4>
-      <form onSubmit={props.onSubmit}>
+      <form>
         <FormGroup
           controlId="formBasicText"
           validationState={props.getValidationState()}
@@ -95,6 +95,7 @@ export default function Form (props) {
 
         <Button type='submit' bsStyle="success">{`GO`}</Button>
         </ButtonGroup>
+        <Button type='submit' bsStyle="success" onClick={props.sendCookie}>{`Send Cookie`}</Button>
       </form>
 
       <br />

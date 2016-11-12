@@ -6,6 +6,7 @@
     "react-scripts": "0.4.1"
   },
   "dependencies": {
+    "axios": "^0.15.2",
     "babel-eslint": "^7.0.0",
     "belle": "^2.0.8",
     "bootstrap": "^3.3.7",
