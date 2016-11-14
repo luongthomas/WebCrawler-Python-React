@@ -1,5 +1,4 @@
 import React from 'react'
-import { Pager } from 'react-bootstrap'
 
 
 function MainContainer(props) {
@@ -8,11 +7,6 @@ function MainContainer(props) {
       <div >
         {props.children}
       </div>
-
-      <Pager>
-          <Pager.Item previous href="#">&larr; Previous Page</Pager.Item>
-          <Pager.Item next href="#" disabled>Next Page &rarr;</Pager.Item>
-      </Pager>
     </div>
   );
 }

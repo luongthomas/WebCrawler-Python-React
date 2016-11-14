@@ -19,7 +19,7 @@ const config = {
 
 
 function startCrawler(site, pages, word, type) {
-  console.log(typeof(site), typeof(pages), typeof(word), typeof(type))
+  console.log(site, pages, word, type)
 
   axios.post('http://127.0.0.1:5000/crawler',
     querystring.stringify({
