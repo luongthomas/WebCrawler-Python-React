@@ -182,49 +182,51 @@ def startSpider():
 			print("Word never found")
 		return traversalDict
 
-	# # DEPTHSPIDER: HELPER
-	# # Here is a helper function for a spider that completes Depth first search
-	# def goDeep(url, keyword, maxPages, numberVisited, traversalList):
-		# # One goal is to collect the links on this page -- ie to fill this array
-		# links = []
-		# # nj --> Check whether or not the page was previously visited
-		# visited = False
-		# for i in range(0,len(traversalList)):
-			# if traversalList[i] == url:
-				# visited = True
-		# # nj --> only visit the page if it is new.
-		# if visited == False:
-			# numberVisited = numberVisited +1  #nj --> moved from above
-			# traversalList[numberVisited] = url	#nj --> update the traversal list by appending to it the current url
-			# try:
-				# print(numberVisited, "Visiting:", url)
-				# parser = LinkParser()
-				# data, links = parser.getLinks(url)
-				# if data.find(keyword)>-1:
-					# foundWord = True
-					# # Add the pages that we visited to the end of our collection
-					# # of pages to visit:
-					# pagesToVisit = pagesToVisit + links
-					# print(" **Success!**")
-			# except:
-				# print(" **Failed!**")
-		# while numberVisited < maxPages and links != [] and not foundWord:
-			# url = links[0]
-			# links = links[1:]
-			# numberVisited, foundWord, traversalList = goDeep(url, keyword, maxPages, numberVisited, traversalList)
-		# #After the branch is explored in full, return traversalList
-		# return numberVisited, foundWord, traversalList
+	# Here is a helper function for a spider that completes Depth first search
+	# def goDeep(url, word, maxPages, numberVisited, traversalList):
+	def goDeep(word, maxPages, traversalDict, pagesToVisit, numberVisited):
+		url = pagesToVisit[len(pagesToVisit)-1]
+		pagesToVisit = pagesToVisit[0:(len(pagesToVisit)-2)] #remove url being visited in this iteration
+		foundWord = False #IS THIS CREATING A PBM?
+		visited = False
+		for key in traversalDict:
+			if key == url:
+				visited = True
+		# nj --> only visit the page if it is new.
+		if visited == False:
+			links = []
+			try:
+				print(numberVisited, "Visiting:", url)
+				parser = LinkParser()
+				data, links = parser.getLinks(url)
+				if data.find(word)>-1:
+					foundWord = True
+				pagesToVisit = pagesToVisit + links[::-1]  # Add the pages that we visited in reverse order so that you pop the 1st link in content-order from the top of stack.
+				print(" **Success!**")
+			except:
+				print(" **Failed!**")
+			traversalDict.update({url: {"children": links, "kw": foundWord}})
+			numberVisited = numberVisited +1  #nj --> moved from above
+		while numberVisited < maxPages and pagesToVisit != [] and not foundWord:
+			foundWord, traversalDict, pagesToVisit, numberVisited = goDeep(word, maxPages, traversalDict, pagesToVisit, numberVisited)
+		#After the branch is explored in full, return traversalList
+		return foundWord, traversalDict, pagesToVisit, numberVisited
 
-	# # DEPTHSPIDER
-	# # Here is a spider that completes a Depth First search.
-	# def depthSpider(url, keyword, maxPages):
-		# numberVisited = 0
+
+	# Here is a spider that completes a Depth First search.
+	def depthSpider(url, word, maxPages):
 		# traversalList = []
-		# numberVisited, foundWord, traversalList = goDeep(url, keyword, maxPages, numberVisited, traversalList)
-		# if foundWord:
-			# print("The keyword", keyword, "was found at", url)
-		# else:
-			# print("Word never found")
+		traversalDict = {} #nj --> build ordered list of pages you've traversed; will be JS w/ parent/child
+		pagesToVisit = [url] #nj
+		numberVisited = 0
+		foundWord = False
+		# numberVisited, foundWord, traversalList = goDeep(url, word, maxPages, numberVisited, traversalList)
+		foundWord, traversalDict, pagesToVisit, numberVisited = goDeep(word, maxPages, traversalDict, pagesToVisit, numberVisited)
+		if foundWord:
+			print("The word", word, "was found at", url)
+		else:
+			print("Word never found")
+		return traversalDict
 
 	# COMMAND THE CRAWLER TO BEGIN
 	# Crawl the web and build a dictionary of website information. Each line contains the name of about
@@ -233,9 +235,8 @@ def startSpider():
 		print("Spider is starting a breadth search from url: " + str(startUrl) + " and searching for keyword: " + str(keyword) + " with " + str(maxPages) + " max pages.\n")
 		traversalDict = breadthSpider(startUrl, keyword, maxPages)
 	elif searchType == "DFS":
-		print("Not implemented yet.\n")
-		#print("Spider is starting a depth search from url: " + str(url) + " and searching for keyword: " + str(keyword) + " with " + str(maxPages) + " max pages.\n")
-		#traversalDict = depthSpider(url, keyword, maxPages)
+		print("Spider is starting a depth search from url: " + str(url) + " and searching for keyword: " + str(keyword) + " with " + str(maxPages) + " max pages.\n")
+		traversalDict = depthSpider(url, keyword, maxPages)
 	else:
 		print("The spider needs to receive a valid search type: " + str(searchType) + " is neither 'depth' nor 'breadth'.\n")
 	print("Crawling is complete\n")
