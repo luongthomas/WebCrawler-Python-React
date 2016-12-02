@@ -85,7 +85,7 @@ def startSpider():
 	print("\n")
 
 	# PARSING TOOL
-    # Credit (with modifications): http://www.netinstructions.com/how-to-make-a-web-crawler-in-under-50-lines-of-python-code/ 
+    # Credit (with modifications): http://www.netinstructions.com/how-to-make-a-web-crawler-in-under-50-lines-of-python-code/
     # We are going to create a class called LinkParser that inherits some methods from HTMLParser which is why it is passed into the definition
 
 	class LinkParser(HTMLParser):
@@ -122,41 +122,41 @@ def startSpider():
 			# Remember the base URL which will be important when creating
 			# absolute URLs
 			self.baseUrl = startUrl
-	    # Now access the site. Some sites block rapid fire requests. When this happens, wait out the block.
-		waitOut = True
-		attempts = 0
-		while (attempts < 5) and (waitOut == True):
-			attempts = attempts + 1
-            # Use the urlopen function from the standard Python 3 
-			try:
-				response = urlopen(startUrl)
-				waitOut = False
-			# When server cannot be reached, wait 3 seconds on each of up to 5 attempts.
-			except URLError as e:
-				if hasattr(e, 'reason'):
-                    # print('We failed to reach a server.')
-                    # print('Reason: ', e.reason)
-					if attempts < 4:
-						time.sleep(3)
-						waitOut = True
-					else:
-						return "",[]
-				elif hasattr(e, 'code'):
-                    # print('The server couldn\'t fulfill the request.')
-                    # print('Error code: ', e.code)
+		    # Now access the site. Some sites block rapid fire requests. When this happens, wait out the block.
+			waitOut = True
+			attempts = 0
+			while (attempts < 5) and (waitOut == True):
+				attempts = attempts + 1
+	            # Use the urlopen function from the standard Python 3
+				try:
+					response = urlopen(startUrl)
 					waitOut = False
-					return "",[]
-		else:
-            # Make sure that we are looking at HTML and not other things that
-            # are floating around on the internet (such as JavaScript files, CSS, or .PDFs for example)
-			if "text/html" in response.getheader("Content-Type"): #NJ edited
-				htmlBytes = response.read()
-                # Note that feed() handles Strings well, but not bytes (A change from Python 2.x to Python 3.x)
-				htmlString = htmlBytes.decode("utf-8")
-				self.feed(htmlString)
-				return htmlString, self.links
+				# When server cannot be reached, wait 3 seconds on each of up to 5 attempts.
+				except URLError as e:
+					if hasattr(e, 'reason'):
+	                    # print('We failed to reach a server.')
+	                    # print('Reason: ', e.reason)
+						if attempts < 4:
+							time.sleep(3)
+							waitOut = True
+						else:
+							return "",[]
+					elif hasattr(e, 'code'):
+	                    # print('The server couldn\'t fulfill the request.')
+	                    # print('Error code: ', e.code)
+						waitOut = False
+						return "",[]
 			else:
-				return "",[]
+	            # Make sure that we are looking at HTML and not other things that
+	            # are floating around on the internet (such as JavaScript files, CSS, or .PDFs for example)
+				if "text/html" in response.getheader("Content-Type"): #NJ edited
+					htmlBytes = response.read()
+	                # Note that feed() handles Strings well, but not bytes (A change from Python 2.x to Python 3.x)
+					htmlString = htmlBytes.decode("utf-8")
+					self.feed(htmlString)
+					return htmlString, self.links
+				else:
+					return "",[]
 
 	# BREADTHSPIDER
 	# The breadthSpider takes in an URL, a word to find, and the number of pages to search through before giving up
@@ -219,7 +219,7 @@ def startSpider():
 					foundWord = True
 				pagesToVisit = pagesToVisit + links[::-1]  # Add the pages that we visited in reverse order so that you pop the 1st link in content-order from the top of stack.
 				traversalDict.update({url: {"children": links, "kw": foundWord}})
-				numberVisited = numberVisited +1 
+				numberVisited = numberVisited +1
 				print(" **Success!**")
 				traversalDict.update({url: {"children": links, "kw": foundWord}})
 				numberVisited = numberVisited +1  #nj --> moved from above
