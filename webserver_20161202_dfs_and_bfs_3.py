@@ -25,6 +25,9 @@ from urllib import parse
 import time
 import json # to build JSON output
 
+# Ordered Dictionaries
+from collections import OrderedDict
+
 from flask_cors import CORS, cross_origin # to bypass CORS
 
 app = Flask(__name__)
@@ -165,8 +168,8 @@ def startSpider():
 	# word since encountering the word ends the search. The crawler does not visit a page twice.
 	## Credit: Minor changes to http://www.netinstructions.com/how-to-make-a-web-crawler-in-under-50-lines-of-python-code/
 
-	def breadthSpider(url, keyword, maxPages):
-		traversalDict = {} # Modification --> build a dictionary of pages you've traversed;
+	def breadthSpider(url, word, maxPages):
+		traversalDict = OrderedDict([('searchType', 'DFS')]) # Modification --> build a dictionary of pages you've traversed;
 		pagesToVisit = [url] # Modification
 		numberVisited = 0
 		foundWord = False
@@ -218,13 +221,13 @@ def startSpider():
 				data, links = parser.getLinks(url)
 				if data.find(word)>-1:
 					foundWord = True
+					print(" **Found word!**")
 				pagesToVisit = pagesToVisit + links[::-1]  # Add the pages that we visited in reverse order so that you pop the 1st link in content-order from the top of stack.
 				traversalDict.update({url: {"children": links, "kw": foundWord}})
-				numberVisited = numberVisited +1
 				print(" **Success!**")
 				if data != "":
 					traversalDict.update({url: {"children": links, "kw": foundWord}})
-					numberVisited = numberVisited +1  #nj --> moved from above
+				numberVisited = numberVisited +1  #nj --> moved from above
 			except:
 				print(" **Failed!**")
 		while numberVisited < maxPages and pagesToVisit != [] and not foundWord:
@@ -235,7 +238,7 @@ def startSpider():
 	# Here is a spider that completes a Depth First search.
 	def depthSpider(url, word, maxPages):
 		# traversalList = []
-		traversalDict = {} #nj --> build ordered list of pages you've traversed; will be JS w/ parent/child
+		traversalDict = OrderedDict([('searchType', 'DFS')]) #nj --> build ordered list of pages you've traversed; will be JS w/ parent/child
 		pagesToVisit = [url] #nj
 		numberVisited = 0
 		foundWord = False
@@ -269,4 +272,4 @@ def startSpider():
 	return json.dumps(traversalDict, sort_keys=False, indent=4)
 
 if __name__ == "__main__":
-	app.run()
+	app.run(host='0.0.0.0')
