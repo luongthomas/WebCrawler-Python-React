@@ -169,7 +169,7 @@ def startSpider():
 	## Credit: Minor changes to http://www.netinstructions.com/how-to-make-a-web-crawler-in-under-50-lines-of-python-code/
 
 	def breadthSpider(url, word, maxPages):
-		traversalDict = OrderedDict([('searchType', 'DFS')]) # Modification --> build a dictionary of pages you've traversed;
+		traversalDict = OrderedDict([('searchType', 'BFS')]) # Modification --> build a dictionary of pages you've traversed;
 		pagesToVisit = [url] # Modification
 		numberVisited = 0
 		foundWord = False
