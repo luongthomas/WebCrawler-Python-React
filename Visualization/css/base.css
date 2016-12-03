@@ -73,8 +73,8 @@ a {
 }
 
 #center-container {
-    width:50000px;
-    height:50000px;
+    width:10000px;
+    height:10000px;
     background-color:#1a1a1a;
     color:#ccc;
 }
@@ -100,8 +100,8 @@ a {
 
 #infovis {
     position:relative;
-    width:50000px;
-    height:50000px;
+    width:10000px;
+    height:10000px;
     margin:auto;
     overflow:hidden;
 }

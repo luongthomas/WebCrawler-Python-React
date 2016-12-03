@@ -1305,7 +1305,7 @@ Options.Edge = {
   overridable: false,
   type: 'line',
   color: '#ccb',
-  lineWidth: 1000,
+  lineWidth: 500,
   dim:15,
   alpha: 1,
   epsilon: 7,
@@ -16546,7 +16546,7 @@ $jit.Hypertree = new Class( {
     var $Hypertree = $jit.Hypertree;
 
     var config = {
-      radius: 1500,
+      radius: 1000,
       offset: 0,
       Edge: {
         type: 'hyperline'
