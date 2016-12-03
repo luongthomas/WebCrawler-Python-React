@@ -1064,8 +1064,8 @@ console.log(JSON.stringify(json));
       //id of the visualization container
       injectInto: 'infovis',
       //canvas width and height
-      width: 10000,
-      height: 150000,
+      width: 5000,
+      height: 7000,
       //Change node and edge styles such as
       //color, width and dimensions.
       Node: {

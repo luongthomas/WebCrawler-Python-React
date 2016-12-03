@@ -1305,7 +1305,7 @@ Options.Edge = {
   overridable: false,
   type: 'line',
   color: '#ccb',
-  lineWidth: 500,
+  lineWidth: 200,
   dim:15,
   alpha: 1,
   epsilon: 7,
