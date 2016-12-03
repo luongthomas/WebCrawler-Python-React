@@ -980,7 +980,9 @@ console.log(JSON.stringify(json));
               style.color = "#555";
 
           } else {
-              style.display = 'none';
+              style.fontSize = "0.7em";
+              style.color = "#555";
+
           }
 
           var left = parseInt(style.left);
