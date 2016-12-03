@@ -1478,7 +1478,7 @@ Options.Fx = {
   
   fps:40,
   duration: 2500,
-  transition: $jit.Trans.Quart.easeInOut,
+  transition: $jit.Trans.Circ.easeInOut,
   clearCanvas: true
 };
 
