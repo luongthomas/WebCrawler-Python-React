@@ -712,16 +712,6 @@ var count = Object.keys(response).length;
 
 console.log("This is the count: "+ count);
 
-// var test = response[responseKeys[1]].children;
-
-// var testCount = Object.keys(test).length;
-
-// console.log("This is testCount: " + testCount);
-
-// console.log("This is the response keys: " + JSON.stringify(test));
-
-// console.log("This is a test: " + JSON.stringify(test[0]));
-
 
 
 var j = 0;
@@ -732,15 +722,6 @@ if(response.searchType == "BFS"){
         
         console.log("This is the current count: " + i);
 
-        // var test = response[responseKeys[i-1]].children;
-
-        // var testCount = Object.keys(test).length;
-
-        // console.log("This is testCount: " + testCount);
-
-        // console.log("This is the response keys: " + JSON.stringify(test));
-
-        // console.log("This is a test: " + JSON.stringify(test));
 
         json.children[i-2] = {
             id: String(i),
@@ -749,26 +730,6 @@ if(response.searchType == "BFS"){
             data: {"$type" : "custom"}
         }
 
-      //  if(testCount > 0 ){
-
-      //   console.log("json.children: " + JSON.stringify(json.children));
-
-      //   var jsonChildArr = Object.keys(json.children)[];
-
-      //   console.log("jsonChildArr: " + JSON.stringify(jsonChildArr));
-        
-      //   for(var l = 0; l < testCount; l++ ){
-            
-      //       // console.log("Testing loop" + l);
-
-      //       jsonChildArr[i].children[l] = {
-      //           id: String(j) + "_" + String(l),
-      //           name: "<a target='_blank' href = "+ JSON.stringify(test[l]) +"><span title= "+ JSON.stringify(test[l])+"><img src='./jack.png'></span></a>" + "Child",
-      //           children: [],
-      //           data: {"$type" : "custom"}
-      //       } 
-      //   }
-      // }
 
         j++;
 
@@ -779,7 +740,6 @@ if(response.searchType == "BFS"){
         var childCount = childKeys.length;
         console.log("childCount: " + childCount);
 
-        // for(var k = 0; k < childCount-1; k++){
 
             var grandChildObj = childObj[childKeys[0]];
 
@@ -803,26 +763,10 @@ if(response.searchType == "BFS"){
                 console.log(json.children[i-2].children[key].id);
 
             }
-
-            // console.log(json.children[i].children[k].id);
-        // }
-
-
     }
 }
 else if(response.searchType == "DFS"){
 
-    // for(var i = 1; i < count; i++){
-
-    //     console.log("This is the responseKeys: " + JSON.stringify(responseKeys));
-
-    //     json.children[i-1] = {
-    //         id: String(j) + "_" + String(i),
-    //         name: "<a target='_blank' href = "+ JSON.stringify(responseKeys[i+1]) +"><span title= "+ JSON.stringify(responseKeys[i+1])+"><img src='./jack.png'></span></a>" + "Child",
-    //         children: [],
-    //         data: {"$type" : "custom"}
-    //       }
-    // }
 
     dfsRecur(json, responseKeys, count-2, 2);
 
@@ -871,55 +815,6 @@ countKeysPerLevel(result, 0, json);
 console.log("These are the results:");
 console.log(JSON.stringify(json));
 
-
-
-
-
-
-//     var json = 
-    // {
-    //     "id": "347_0",
-    //     "name": "<a target='_blank' href='http://www.nytimes.com/'><span title='http://www.nytimes.com/'><img src='/images/jack.png'></span></a> Parent",
-    //     "children": [{
-    //         "id": "126510_1",
-
-    //         "name": "<a target='_blank' href='http://www.nytimes.com/content/help/site/ie9-support.html'><span title='http://www.nytimes.com/content/help/site/ie9-support.html'><img src='/images/jack.png'></span></a> Child",
-    //         "data": { 
-    //             "$type":"custom"
-    //         },
-    //         "children": []
-    //     }, {
-    //         "id": "126510_2",
-    //         "name": "<a target='_blank' href='http://www.nytimes.com/#top-news'><span title='http://www.nytimes.com/#top-news'><img src='/images/jack.png'></span></a> Child",
-    //         "data": { 
-    //             "$type":"custom"
-    //           },
-    //         "children": []
-    //     }, {
-    //         "id": "126510_3",
-    //         "name": "<a target='_blank' href='http://www.nytimes.com/#site-index-navigation'><span title='http://www.nytimes.com/#site-index-navigation'><img src='/images/jack.png'></span></a> Child",
-    //         "data": { 
-    //             "$type":"custom"
-    //         },
-    //         "children": []
-    //     }, {
-    //         "id": "126510_4",
-    //         "name": "<a target='_blank' href='http://cn.nytimes.com'><span title='http://cn.nytimes.com'><img src='/images/jack.png'></span></a> Child",
-    //         "data": { 
-    //             "$type":"custom"
-    //         },
-    //         "children": []
-    //     }, {
-    //         "id": "126510_5",
-    //         "name": "<a target='_blank' href='http://www.nytimes.com/es/'><span title='http://www.nytimes.com/es/'><img src='/images/jack.png'></span></a> Child",
-    //         "data": { 
-    //             "$type":"custom"
-
-    //         },
-    //         "children": []
-    //     }],
-    //     "data": []
-    // };
     //end
     var infovis = document.getElementById('infovis');
 // <<<<<<< HEAD
@@ -941,12 +836,12 @@ console.log(JSON.stringify(json));
       Node: {
           dim: 9,
           color: "#f00",
-          type: "custom",
-          height: 5,
-          width: 15
+          type: "circle",
+          height: 10,
+          width: 20
       },
       Edge: {
-          lineWidth: 5,
+          lineWidth: 3,
           color: "#088"
       },
       onBeforeCompute: function(node){
