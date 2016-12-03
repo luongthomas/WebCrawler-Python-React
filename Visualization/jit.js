@@ -1804,7 +1804,7 @@ Options.Navigation = {
   enable: true,
   type: 'auto',
   panning: 'avoid nodes', //true | 'avoid nodes'
-  zooming: 25
+  zooming: false
 };
 
 /*
@@ -16546,7 +16546,7 @@ $jit.Hypertree = new Class( {
     var $Hypertree = $jit.Hypertree;
 
     var config = {
-      radius: 1000,
+      radius: 'auto',
       offset: 0,
       Edge: {
         type: 'hyperline'
